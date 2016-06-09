@@ -1,6 +1,7 @@
 
 package me.moreshare.platform;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -30,8 +31,10 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         Bundle paramBundle = new Bundle();
         paramBundle.putBoolean("KEY_START_FROM_OTHER_ACTIVITY", true);
-        String dexPath = "/mnt/sdcard/gameA.apk";
-        String dexOutPath = "/mnt/sdcard/";
+        File dexOutputDir = getDir("dex", 0);
+        String dexPath = "/tmp/gameA.apk";
+        String dexOutPath = dexOutputDir.getAbsolutePath();
+        Log.e(TAG, "dexOutPath = " + dexOutPath);
         loadApk(paramBundle, dexPath, dexOutPath);
     }
 
