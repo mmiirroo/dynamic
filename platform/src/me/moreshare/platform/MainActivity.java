@@ -32,9 +32,9 @@ public class MainActivity extends Activity implements OnClickListener {
         Bundle paramBundle = new Bundle();
         paramBundle.putBoolean("KEY_START_FROM_OTHER_ACTIVITY", true);
         File dexOutputDir = getDir("dex", 0);
-        String dexPath = "/tmp/gameA.apk";
+        String dexPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/gameA.apk";
         String dexOutPath = dexOutputDir.getAbsolutePath();
-        Log.e(TAG, "dexOutPath = " + dexOutPath);
+        Log.e(TAG, "dexPath = " + dexPath + ", dexOutPath = " + dexOutPath);
         loadApk(paramBundle, dexPath, dexOutPath);
     }
 
@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         try {
             PackageInfo localObject = getPackageManager().getPackageArchiveInfo(dexpath, 1);
-            if (localObject.activities != null && localObject.activities.length > 0) {
+            if (null != localObject.activities && localObject.activities.length > 0) {
                 String activityName = localObject.activities[0].name;
                 Log.d(TAG, "activityName = " + activityName);
 
